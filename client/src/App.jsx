@@ -1,15 +1,11 @@
 import { EthProvider } from "./contexts/EthContext";
-import Intro from "./components/Intro/";
-import Setup from "./components/Setup";
-import Demo from "./components/Demo";
-import Footer from "./components/Footer";
-import Certificate, {
-  loader as certificateLoader,
-} from "./components/Certificate";
 import Login from "./components/Login";
+import CertificateViewer, {
+  loader as certificateLoader,
+} from "./components/CertificateViewer";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import { Switch, Route } from "react-router-dom";
-import { Link } from "react-router-dom";
+import Certificate from "./components/Certificate";
+import UploadCertificate from "./components/UploadCertificate";
 import Register from "./components/Register";
 
 const router = createBrowserRouter([
@@ -26,9 +22,17 @@ const router = createBrowserRouter([
     element: <Register />,
   },
   {
+    path: "/certificate/",
+    element: <Certificate />,
+  },
+  {
+    path: "/certificate/upload",
+    element: <UploadCertificate />,
+  },
+  {
     path: "/certificate/:id",
     loader: certificateLoader,
-    element: <Certificate />,
+    element: <CertificateViewer />,
   },
 ]);
 

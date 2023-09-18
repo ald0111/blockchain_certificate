@@ -1,12 +1,10 @@
 import "./login.css";
-import { useEth } from "../contexts/EthContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { state } = useEth();
 
   const login = (e) => {
     e.preventDefault();
@@ -28,6 +26,8 @@ const Login = () => {
       .then((data) => {
         if (data.userId) {
           localStorage.setItem("userId", data.userId);
+          localStorage.setItem("role", data.role);
+          alert("Login successful");
         }
         console.log(data);
       })

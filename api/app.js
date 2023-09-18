@@ -78,19 +78,25 @@ app.post("/users", (req, res) => {
       if (err) {
         throw err;
       }
-      res.json({ id: this.lastID });
+      res.json({ id: this.lastID, role: role });
     }
   );
 });
 
 // Get all certificates
 app.get("/certificates", (req, res) => {
-  db.all("SELECT * FROM Certificates", (err, rows) => {
-    if (err) {
-      throw err;
+  const { user_id } = req.query;
+  console.log(req.query);
+  db.all(
+    "SELECT id FROM Certificates WHERE user_id = ?",
+    [user_id],
+    (err, rows) => {
+      if (err) {
+        throw err;
+      }
+      res.json(rows);
     }
-    res.json(rows);
-  });
+  );
 });
 
 // Get certificate by ID
@@ -129,14 +135,14 @@ app.post("/certificates", (req, res) => {
 app.post("/validate-credentials", (req, res) => {
   const { username, password } = req.body;
   db.get(
-    "SELECT id FROM Users WHERE username = ? AND password = ?",
+    "SELECT id,role FROM Users WHERE username = ? AND password = ?",
     [username, password],
     (err, row) => {
       if (err) {
         throw err;
       }
       if (row) {
-        res.json({ userId: row.id });
+        res.json({ userId: row.id, role: row.role });
       } else {
         res.status(401).json({ error: "Invalid credentials" });
       }

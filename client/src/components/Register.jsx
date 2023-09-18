@@ -10,6 +10,10 @@ const Register = () => {
   const [organisationName, setOrganisationName] = useState("");
   const [role, setRole] = useState("");
 
+  useEffect(() => {
+    console.log("role, ", role);
+  }, [role]);
+
   const { state } = useEth();
 
   const register = (e) => {
@@ -25,7 +29,7 @@ const Register = () => {
         username: username,
         password: password,
         name: name,
-        organisation_name: organisationName,
+        organization_name: organisationName,
         role: role,
       }),
     })
@@ -36,7 +40,8 @@ const Register = () => {
       })
       .then((data) => {
         if (data.userId) {
-          localStorage.setItem("userId", data.userId);
+          localStorage.setItem("userId", data.id);
+          localStorage.setItem("role", data.role);
         }
         console.log(data);
       })
@@ -116,21 +121,12 @@ const Register = () => {
               setRole(e.target.value);
             }}
           >
-            <option value="student">Student</option>
+            <option value="student" selected>
+              Student
+            </option>
             <option value="issuer">Issuer</option>
           </select>
-          <br />
-          <br />
-          <label htmlFor="username">Your username</label>
-          <input
-            type="text"
-            placeholder="Enter Username"
-            name="username"
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-            required
-          />
+
           {/* <div className="subcontainer">
             <label>
               <input type="checkbox" checked="checked" name="remember" />

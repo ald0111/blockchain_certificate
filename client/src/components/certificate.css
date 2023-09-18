@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans|Pinyon+Script|Rochester');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans|Pinyon+Script|Rochester");
 
 .cursive {
-  font-family: 'Pinyon Script', cursive;
+  font-family: "Pinyon Script", cursive;
 }
 
 .sans {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 .bold {
@@ -37,7 +37,7 @@
 
 body {
   padding: 20px 0;
-  background: #ccc;
+  /* background: #ccc; */
 }
 
 .pm-certificate-container {
@@ -47,8 +47,8 @@ body {
   background-color: #618597;
   padding: 30px;
   color: #333;
-  font-family: 'Open Sans', sans-serif;
-  box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+  font-family: "Open Sans", sans-serif;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   /*background: -webkit-repeating-linear-gradient(
     45deg,
     #618597,
@@ -63,7 +63,7 @@ body {
     #b2cad6 1px,
     #b2cad6 2px
   );*/
-  
+
   .outer-border {
     width: 794px;
     height: 594px;
@@ -71,10 +71,10 @@ body {
     left: 50%;
     margin-left: -397px;
     top: 50%;
-    margin-top:-297px;
+    margin-top: -297px;
     border: 2px solid #fff;
   }
-  
+
   .inner-border {
     width: 730px;
     height: 530px;
@@ -82,7 +82,7 @@ body {
     left: 50%;
     margin-left: -365px;
     top: 50%;
-    margin-top:-265px;
+    margin-top: -265px;
     border: 2px solid #fff;
   }
 
@@ -91,7 +91,7 @@ body {
     width: 720px;
     height: 520px;
     padding: 0;
-    border: 1px solid #E1E5F0;
+    border: 1px solid #e1e5f0;
     background-color: rgba(255, 255, 255, 1);
     background-image: none;
     left: 50%;
@@ -129,8 +129,8 @@ body {
         font-size: 20px;
       }
     }
-    .tab1{
-        tab-size :8;
+    .tab1 {
+      tab-size: 8;
     }
 
     .pm-earned {
