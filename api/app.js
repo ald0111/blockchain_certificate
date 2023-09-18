@@ -1,10 +1,21 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const sqlite3 = require("sqlite3").verbose();
-
+const cors = require("cors");
 const app = express();
 const port = 3000;
+const whitelist = ["http://localhost:3001"];
 
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+app.use(cors(corsOptions));
 // Parse JSON requests
 app.use(bodyParser.json());
 
@@ -85,12 +96,16 @@ app.get("/certificates", (req, res) => {
 // Get certificate by ID
 app.get("/certificates/:id", (req, res) => {
   const { id } = req.params;
-  db.get("SELECT * FROM Certificates WHERE id = ?", [id], (err, row) => {
-    if (err) {
-      throw err;
+  db.get(
+    "SELECT * FROM CertificateView WHERE certificate_id = ?",
+    [id],
+    (err, row) => {
+      if (err) {
+        throw err;
+      }
+      res.json(row);
     }
-    res.json(row);
-  });
+  );
 });
 
 // Create a new certificate
