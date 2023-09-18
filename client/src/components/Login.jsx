@@ -1,6 +1,42 @@
 import "./login.css";
+import { useEth } from "../contexts/EthContext";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const { state } = useEth();
+
+  const login = (e) => {
+    e.preventDefault();
+    fetch("http://localhost:3000/validate-credentials", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    })
+      .then((response) => {
+        console.log(response);
+
+        return response.json();
+      })
+      .then((data) => {
+        if (data.userId) {
+          localStorage.setItem("userId", data.userId);
+        }
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    console.log("login");
+  };
+
   return (
     <div>
       <h1>Login form</h1>
@@ -16,6 +52,9 @@ const Login = () => {
             type="text"
             placeholder="Enter Username"
             name="username"
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
             required
           />
 
@@ -27,6 +66,9 @@ const Login = () => {
             type="password"
             placeholder="Enter Password"
             name="pswrd"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
             required
           />
 
@@ -40,10 +82,12 @@ const Login = () => {
             </p>
           </div> */}
 
-          <button type="submit">Login</button>
+          <button type="submit" onClick={login}>
+            Login
+          </button>
 
           <p className="register">
-            {/* Not a member? <a href="#">Register here!</a> */}
+            Not a member? <Link to="/register">Register here!</Link>
           </p>
         </div>
       </form>

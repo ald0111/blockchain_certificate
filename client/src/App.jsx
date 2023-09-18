@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Register from "./components/Register";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
   {
     path: "/certificate/:id",
