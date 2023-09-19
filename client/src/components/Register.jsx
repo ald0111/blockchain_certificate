@@ -8,30 +8,31 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [organisationName, setOrganisationName] = useState("");
-  const [role, setRole] = useState("");
+  const [myrole, setMyRole] = useState("student");
 
   useEffect(() => {
-    console.log("role, ", role);
-  }, [role]);
+    console.log("role, ", myrole);
+  }, [myrole]);
 
   const { state } = useEth();
 
   const register = (e) => {
-    console.log("register");
+    const req = {
+      eth_address: state.accounts[0],
+      username: username,
+      password: password,
+      name: name,
+      organization_name: organisationName,
+      role: myrole,
+    };
+    console.log(req);
     e.preventDefault();
     fetch("http://localhost:3000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        eth_address: state.accounts[0],
-        username: username,
-        password: password,
-        name: name,
-        organization_name: organisationName,
-        role: role,
-      }),
+      body: JSON.stringify(req),
     })
       .then((response) => {
         console.log(response);
@@ -118,7 +119,7 @@ const Register = () => {
             id="role"
             name="role"
             onChange={(e) => {
-              setRole(e.target.value);
+              setMyRole(e.target.value);
             }}
           >
             <option value="student" selected>

@@ -26,7 +26,7 @@ const db = new sqlite3.Database("bc.db");
 db.run(`CREATE TABLE IF NOT EXISTS Users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   username TEXT UNIQUE,
-  eth_address TEXT UNIQUE,
+  eth_address TEXT,
   password TEXT,
   name TEXT,
   role TEXT,
