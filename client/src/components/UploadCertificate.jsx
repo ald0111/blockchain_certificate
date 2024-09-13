@@ -36,7 +36,7 @@ export default function UploadCertificate() {
 
   return (
     <div>
-      <h1>Register form</h1>
+      <h1>Issue new certificate</h1>
       <form action="">
         <div className="headingsContainer">
           <h3>Enter your details</h3>
@@ -86,7 +86,7 @@ export default function UploadCertificate() {
           <br />
 
           <button type="submit" onClick={register}>
-            Register
+            Issue Certificate
           </button>
         </div>
       </form>

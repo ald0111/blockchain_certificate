@@ -1,5 +1,6 @@
 import "./login.css";
 import { useEth } from "../contexts/EthContext";
+import { useCont } from "../contexts/MyContext";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -9,16 +10,15 @@ const Register = () => {
   const [name, setName] = useState("");
   const [organisationName, setOrganisationName] = useState("");
   const [myrole, setMyRole] = useState("student");
+  const { web3 } = useCont();
 
   useEffect(() => {
-    console.log("role, ", myrole);
-  }, [myrole]);
-
-  const { state } = useEth();
+    console.log(web3);
+  }, [web3]);
 
   const register = (e) => {
     const req = {
-      eth_address: state.accounts[0],
+      eth_address: web3.accounts[0],
       username: username,
       password: password,
       name: name,

@@ -3,19 +3,19 @@ const bodyParser = require("body-parser");
 const sqlite3 = require("sqlite3").verbose();
 const cors = require("cors");
 const app = express();
-const port = 3000;
-const whitelist = ["http://localhost:3001"];
+const port = 3001;
+// const whitelist = ["http://localhost:3001"];
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1 || !origin) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+// };
+// app.use(cors(corsOptions));
 // Parse JSON requests
 app.use(bodyParser.json());
 
@@ -151,18 +151,14 @@ app.post("/validate-credentials", (req, res) => {
 });
 
 // Get Certificates by User ID
-app.get("/certificates/:userId", (req, res) => {
+app.get("/admin/certs", (req, res) => {
   const { userId } = req.params;
-  db.all(
-    "SELECT * FROM Certificates WHERE user_id = ?",
-    [userId],
-    (err, rows) => {
-      if (err) {
-        throw err;
-      }
-      res.json(rows);
+  db.all("SELECT * FROM CertificateView;", [userId], (err, rows) => {
+    if (err) {
+      throw err;
     }
-  );
+    res.json(rows);
+  });
 });
 
 // ... (remaining code remains unchanged)

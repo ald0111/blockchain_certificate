@@ -29,6 +29,7 @@ function CertificateViewer() {
     event,
     date,
   } = useLoaderData();
+
   return (
     <div className="container pm-certificate-container">
       <div className="outer-border"></div>
@@ -114,15 +115,16 @@ function CertificateViewer() {
                     Date Complete: <span className="tab1">{date}</span>
                   </p>
                   {/* <span className="pm-credits-text block sans">D</span> */}
-                  <span className="pm-empty-space block underline"></span>
+
                   <span className="bold block">Issuer Name: {issuer_name}</span>
                   <span className="bold block">
                     ETH_Addr: {user_eth_address}
                   </span>
 
-                  <span className="pm-empty-space block underline"></span>
-                  <span className="bold block">Certificate ID: </span>
-                  <span className="bold block">{certificate_id}</span>
+                  <span className="bold block">
+                    Certificate ID: {certificate_id}
+                  </span>
+                  <span className="bold block"></span>
                 </span>
               </div>
             </div>
@@ -235,10 +237,11 @@ export function CertificateRenderer({ id }) {
                   <p className="pm-credits-text block sans">
                     Oranised by:{" "}
                     <span className="tab1">{cert["issuer_organization"]}</span>
-                    Date Complete: <span className="tab1">{/*date*/}</span>
+                    <br />
+                    Date Complete: <span className="tab1">{cert["date"]}</span>
                   </p>
                   {/* <span className="pm-credits-text block sans">D</span> */}
-                  <span className="pm-empty-space block underline"></span>
+
                   <span className="bold block">
                     Issuer Name: {cert["issuer_name"]}
                   </span>
@@ -246,9 +249,10 @@ export function CertificateRenderer({ id }) {
                     ETH_Addr: {cert["user_eth_address"]}
                   </span>
 
-                  <span className="pm-empty-space block underline"></span>
-                  <span className="bold block">Certificate ID: </span>
-                  <span className="bold block">{cert["certificate_id"]}</span>
+                  <span className="bold block">
+                    Certificate ID: {cert["certificate_id"]}
+                  </span>
+                  <span className="bold block"></span>
                 </span>
               </div>
             </div>

@@ -1,4 +1,5 @@
 import { EthProvider } from "./contexts/EthContext";
+import { MyContext } from "./contexts/MyContext";
 import Login from "./components/Login";
 import CertificateViewer, {
   loader as certificateLoader,
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <EthProvider>
+    <MyContext>
       {/* <div id="App">
         <div className="container">
           {/* <Intro />
@@ -55,7 +56,7 @@ function App() {
       {/* <Link to={"/login"}>Login</Link>
       <Link to={"/certificate"}>Certificate</Link> */}
       <Outlet />
-    </EthProvider>
+    </MyContext>
   );
 }
 
