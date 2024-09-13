@@ -2,7 +2,7 @@ import "./login.css";
 import { useEth } from "../contexts/EthContext";
 import { useCont } from "../contexts/MyContext";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -11,6 +11,7 @@ const Register = () => {
   const [organisationName, setOrganisationName] = useState("");
   const [myrole, setMyRole] = useState("student");
   const { web3 } = useCont();
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log(web3);
@@ -40,9 +41,18 @@ const Register = () => {
         return response.json();
       })
       .then((data) => {
-        if (data.userId) {
-          localStorage.setItem("userId", data.id);
+        if (data.id) {
+          localStorage.setItem("id", data.id);
           localStorage.setItem("role", data.role);
+          console.log(data.role);
+          // alert("Login successful");
+          if (data.role === "issuer") {
+            navigate("/certificate/upload");
+          } else {
+            navigate("/certificate");
+          }
+        } else {
+          alert("Invalid credentials");
         }
         console.log(data);
       })

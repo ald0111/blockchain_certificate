@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Logout from "./Logout";
 
 export default function UploadCertificate() {
   const [userId, setuserId] = useState("");
@@ -36,6 +37,8 @@ export default function UploadCertificate() {
 
   return (
     <div>
+      <Logout />
+
       <h1>Issue new certificate</h1>
       <form action="">
         <div className="headingsContainer">

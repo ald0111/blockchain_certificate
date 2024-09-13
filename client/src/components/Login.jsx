@@ -1,11 +1,12 @@
 import "./login.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   const login = (e) => {
     e.preventDefault();
     fetch("http://localhost:3000/validate-credentials", {
@@ -27,7 +28,15 @@ const Login = () => {
         if (data.userId) {
           localStorage.setItem("userId", data.userId);
           localStorage.setItem("role", data.role);
-          alert("Login successful");
+          console.log(data.role);
+          // alert("Login successful");
+          if (data.role === "issuer") {
+            navigate("/certificate/upload");
+          } else {
+            navigate("/certificate");
+          }
+        } else {
+          alert("Invalid credentials");
         }
         console.log(data);
       })

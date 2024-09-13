@@ -8,11 +8,13 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Certificate from "./components/Certificate";
 import UploadCertificate from "./components/UploadCertificate";
 import Register from "./components/Register";
+import LandingPage from "./components/LandingPage";
+import Logout from "./components/Logout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <LandingPage />,
   },
   {
     path: "/login",

@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { CertificateRenderer } from "./CertificateViewer";
+import Logout from "./Logout";
 
 export default function Certificate() {
-  const [certId, setCertId] = useState();
+  const [certId, setCertId] = useState([]);
+  // console.log("Certificate", certId);
   useEffect(() => {
     const url =
       "http://localhost:3000/certificates?user_id=" +
@@ -31,5 +33,14 @@ export default function Certificate() {
       });
   }, []);
 
-  return <div>{certId}</div>;
+  return (
+    <div>
+      <Logout />
+      {certId.length > 0 ? (
+        certId
+      ) : (
+        <h1>Yout don't have any certificates issued to you yet.</h1>
+      )}
+    </div>
+  );
 }

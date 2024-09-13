@@ -110,6 +110,7 @@ app.get("/certificates/:id", (req, res) => {
         throw err;
       }
       res.json(row);
+      console.log(row);
     }
   );
 });
@@ -117,6 +118,7 @@ app.get("/certificates/:id", (req, res) => {
 // Create a new certificate
 app.post("/certificates", (req, res) => {
   const { user_id, issuer_id, date, event } = req.body;
+  console.log(req.body);
   db.run(
     "INSERT INTO Certificates (user_id, issuer_id, date, event) VALUES (?, ?, ?, ?)",
     [user_id, issuer_id, date, event],
