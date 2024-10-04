@@ -34,7 +34,14 @@ export default function Certificate() {
   }, []);
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Logout />
       {certId.length > 0 ? (
         certId

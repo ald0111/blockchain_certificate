@@ -107,7 +107,7 @@ app.get("/certificates/:id", (req, res) => {
     [id],
     (err, row) => {
       if (err) {
-        throw err;
+        return res.status(500).json({ error: err.message });
       }
       res.json(row);
       console.log(row);
@@ -119,14 +119,29 @@ app.get("/certificates/:id", (req, res) => {
 app.post("/certificates", (req, res) => {
   const { user_id, issuer_id, date, event } = req.body;
   console.log(req.body);
+
   db.run(
     "INSERT INTO Certificates (user_id, issuer_id, date, event) VALUES (?, ?, ?, ?)",
     [user_id, issuer_id, date, event],
     function (err) {
       if (err) {
-        throw err;
+        return res.status(500).json({ error: err.message });
       }
-      res.json({ id: this.lastID });
+
+      const insertedId = this.lastID;
+
+      // Fetch the newly inserted certificate
+      db.get(
+        "SELECT * FROM CertificateView WHERE certificate_id = ?",
+        [insertedId],
+        (err, row) => {
+          if (err) {
+            return res.status(500).json({ error: err.message });
+          }
+          console.log(row);
+          res.json(row);
+        }
+      );
     }
   );
 });

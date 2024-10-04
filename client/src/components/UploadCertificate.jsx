@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Logout from "./Logout";
+import { useCont } from "../contexts/MyContext";
 
 export default function UploadCertificate() {
+  const { contract, hashes, addHash, getAllHashes } = useCont();
   const [userId, setuserId] = useState("");
   const [date, setdate] = useState("");
   const [event, setevent] = useState("");
@@ -28,6 +30,7 @@ export default function UploadCertificate() {
       })
       .then((data) => {
         console.log(data);
+        addHash(JSON.stringify(data));
         alert("Certificate uploaded successfully");
       })
       .catch((error) => {
